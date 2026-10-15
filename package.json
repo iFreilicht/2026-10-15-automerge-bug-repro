@@ -1,0 +1,11 @@
+{
+  "name": "automerge-list-float-repro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "repro": "node repro.mjs"
+  },
+  "dependencies": {
+    "@automerge/automerge": "3.5.0"
+  }
+}
