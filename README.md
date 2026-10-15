@@ -13,7 +13,7 @@ doc.value;   // 0.9999999999999999
 doc.list[0]; // 0
 ```
 
-Reproduced with `@automerge/automerge` 3.5.0 (latest) and 3.4.1 on Node.js 24.16 (macOS, arm64), and in the browser through `automerge-repo` (Chromium). It shows up in practice for normalised vectors: a camera direction along +X is often `[0.9999999999999999, -3e-16, 6e-17]`, which comes back as nearly the zero vector.
+Reproduced with `@automerge/automerge` 3.5.0 (latest) and 3.4.1 on Node.js 24.16 (macOS, arm64), and in the browser through `automerge-repo` (Chromium). I found this issue when trying to save a normalised vector: a camera direction along +X becomes `[0.9999999999999999, -3e-16, 6e-17]` due to the imperfections of floating point math, but after the roundtrip through automerge, this comes back with an X-component of 0 and random, very small components for Y and Z.
 
 ## Run
 
@@ -22,7 +22,7 @@ npm install   # or: pnpm install
 npm run repro
 ```
 
-Output (exit code 1):
+Output with `@automerge/automerge` 3.5.0 (latest) and 3.4.1:
 
 ```
 ok   map field                            0.9999999999999999   expected 0.9999999999999999
